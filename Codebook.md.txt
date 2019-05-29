@@ -1,0 +1,16 @@
+All of the analysis takes place in Run_analysis.R. Running that one file will clean up the data into a single tidy data set and run a small bit of analysis on it.
+
+The variables after running the analysis, you will see a variable called data in your environment. Data contains a data frame of the tidied data that the analysis will be run on.
+
+Data The original data lives under ./data/UCI HAR Dataset/. It is split between two groups called "test" and "train". Run_analysis.R cleans this data into the data variable. The first column in data is the subject id, the second is the activity, and the rest are the means and standard deviations of different measurements broken down by subject and activity.
+
+The following transormations take place in Run_analysis.R:
+
+merge test and train group subject data (via rbind)
+merge test and train group y_data (via rbind)
+merge test and train group x_data (via rbind)
+name the merged data columns based on the data in the features data
+merge subject data, y_data, x_data, into one data frame (via colbind)
+rename all columns to be more human readable
+turn the activity column into a factor using labels from the activity labels data
+After the transformations are complete, we use ddply from the plyr package to calculate the mean for each column based on unique id, activity factors. The result of ddply is written out to tidydata.txt.
